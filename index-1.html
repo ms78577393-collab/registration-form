@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashutosh College – Registration Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --maroon: #6b1a1a;
+    --gold: #c9933a;
+    --gold-light: #f0d080;
+    --cream: #fdf8f0;
+    --dark: #1a1009;
+    --text: #2e1a0e;
+    --border: #d4b07a;
+    --input-bg: #fff9f0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0 0 60px;
+  }
+
+  /* Header */
+  .college-header {
+    background: linear-gradient(135deg, var(--maroon) 0%, #3d0d0d 100%);
+    color: white;
+    text-align: center;
+    padding: 36px 20px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .college-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(201,147,58,0.06) 20px,
+      rgba(201,147,58,0.06) 40px
+    );
+  }
+  .college-header .logo-ring {
+    width: 72px; height: 72px;
+    border: 3px solid var(--gold);
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--gold);
+    position: relative;
+    z-index: 1;
+  }
+  .college-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 5vw, 28px);
+    color: var(--gold-light);
+    letter-spacing: 1px;
+    position: relative; z-index: 1;
+  }
+  .college-header h2 {
+    font-size: clamp(13px, 3vw, 16px);
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    margin-top: 4px;
+    position: relative; z-index: 1;
+  }
+  .college-header p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 6px;
+    position: relative; z-index: 1;
+  }
+
+  /* Gold divider */
+  .gold-bar {
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+  }
+
+  /* Form title */
+  .form-title {
+    text-align: center;
+    padding: 28px 20px 10px;
+  }
+  .form-title h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--maroon);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: inline-block;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 8px;
+  }
+
+  /* Card */
+  .form-card {
+    max-width: 680px;
+    margin: 20px auto 0;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px 32px;
+    box-shadow: 0 8px 40px rgba(107,26,26,0.08);
+    position: relative;
+  }
+  .form-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--maroon), var(--gold), var(--maroon));
+    border-radius: 12px 12px 0 0;
+  }
+
+  /* Section heading */
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 28px 0 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Field row */
+  .field-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .field-label {
+    min-width: 140px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text);
+    padding-top: 10px;
+    flex-shrink: 0;
+  }
+  .field-label .req { color: var(--maroon); margin-left: 2px; }
+  .colon {
+    padding-top: 10px;
+    color: var(--border);
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+  .field-input { flex: 1; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"],
+  input[type="date"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 9px 13px;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    background: var(--input-bg);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--maroon);
+    box-shadow: 0 0 0 3px rgba(107,26,26,0.08);
+  }
+  textarea { resize: vertical; min-height: 70px; }
+
+  /* Radio & Checkbox */
+  .radio-group, .checkbox-group {
+    display: flex; flex-wrap: wrap; gap: 14px;
+    padding-top: 9px;
+  }
+  .radio-group label, .checkbox-group label {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 13.5px; cursor: pointer;
+  }
+  input[type="radio"], input[type="checkbox"] {
+    accent-color: var(--maroon);
+    width: 15px; height: 15px;
+  }
+
+  /* File input */
+  .file-wrapper {
+    display: flex; align-items: center; gap: 10px;
+    padding-top: 6px;
+  }
+  input[type="file"] { font-size: 13px; }
+
+  /* Declaration */
+  .declaration {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin: 28px 0 24px;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .declaration input { margin-top: 3px; flex-shrink: 0; }
+  .declaration p { font-size: 13px; color: #555; line-height: 1.6; }
+
+  /* Buttons */
+  .btn-row {
+    display: flex; gap: 14px; justify-content: center;
+  }
+  .btn-submit {
+    background: linear-gradient(135deg, var(--maroon), #8b2222);
+    color: white;
+    border: none;
+    padding: 12px 44px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 16px rgba(107,26,26,0.25);
+  }
+  .btn-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 22px rgba(107,26,26,0.35);
+  }
+  .btn-reset {
+    background: white;
+    color: var(--maroon);
+    border: 1.5px solid var(--maroon);
+    padding: 12px 36px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .btn-reset:hover { background: #fdf0f0; }
+
+  /* Success message */
+  #success-msg {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  #success-msg .tick {
+    font-size: 52px; margin-bottom: 14px;
+  }
+  #success-msg h3 {
+    font-family: 'Playfair Display', serif;
+    color: var(--maroon);
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  #success-msg p { color: #666; font-size: 14px; }
+
+  @media (max-width: 560px) {
+    .form-card { padding: 24px 16px; margin: 12px 12px 0; }
+    .field-row { flex-direction: column; gap: 4px; }
+    .field-label { min-width: unset; padding-top: 0; }
+    .colon { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="college-header">
+  <div class="logo-ring">A</div>
+  <h1>Ashutosh College</h1>
+  <h2>Computer Training and Centre</h2>
+  <p>Affiliated to the University of Calcutta &nbsp;|&nbsp; 92, S.P. Mukherjee Road, Kolkata – 700 026, West Bengal</p>
+</div>
+<div class="gold-bar"></div>
+
+<div class="form-title">
+  <h3>Registration Form</h3>
+</div>
+
+<div class="form-card">
+
+
+  <form action="https://formspree.io/f/xnjgglqe" method="POST">
+
+    <div class="section-label">Personal Information</div>
+
+    <div class="field-row">
+      <div class="field-label">Name <span class="req">*</span></div>
+      <div class="colon">:</div>
+      <div class="field-input"><input type="text" name="Name" required placeholder="Full name"></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Father's Name <span class="req">*</span></div>
+      <div class="colon">:</div>
+      <div class="field-input"><input type="text" name="Father's Name" required placeholder="Father's full name"></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Mother's Name <span class="req">*</span></div>
+      <div class="colon">:</div>
+      <div class="field-input"><input type="text" name="Mother's Name" required placeholder="Mother's full name"></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Date of Birth <span class="req">*</span></div>
+      <div class="colon">:</div>
+      <div class="field-input"><input type="date" name="Date of Birth" required></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Mobile No. <span class="req">*</span></div>
+      <div class="colon">:</div>
+      <div class="field-input"><input type="tel" name="Mobile No" required placeholder="10-digit mobile number" maxlength="10"></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Email ID <span class="req">*</span></div>
+      <div class="colon">:</div>
+      <div class="field-input"><input type="email" name="Email" required placeholder="your@email.com"></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Password <span class="req">*</span></div>
+      <div class="colon">:</div>
+      <div class="field-input"><input type="password" name="Password" required placeholder="Create a password"></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Gender <span class="req">*</span></div>
+      <div class="colon">:</div>
+      <div class="field-input">
+        <div class="radio-group">
+          <label><input type="radio" name="Gender" value="Male" required> Male</label>
+          <label><input type="radio" name="Gender" value="Female"> Female</label>
+          <label><input type="radio" name="Gender" value="Other"> Other</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Additional Details</div>
+
+    <div class="field-row">
+      <div class="field-label">Nationality</div>
+      <div class="colon">:</div>
+      <div class="field-input"><input type="text" name="Nationality" value="Indian"></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Religion</div>
+      <div class="colon">:</div>
+      <div class="field-input">
+        <select name="Religion">
+          <option value="">-- Select --</option>
+          <option>Hindu</option>
+          <option>Muslim</option>
+          <option>Christian</option>
+          <option>Sikh</option>
+          <option>Buddhist</option>
+          <option>Jain</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Blood Group</div>
+      <div class="colon">:</div>
+      <div class="field-input">
+        <select name="Blood Group">
+          <option value="">-- Select --</option>
+          <option>A+</option><option>A−</option>
+          <option>B+</option><option>B−</option>
+          <option>O+</option><option>O−</option>
+          <option>AB+</option><option>AB−</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="section-label">Academic Information</div>
+
+    <div class="field-row">
+      <div class="field-label">Department <span class="req">*</span></div>
+      <div class="colon">:</div>
+      <div class="field-input">
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="Department" value="Bengali"> Bengali</label>
+          <label><input type="checkbox" name="Department" value="English"> English</label>
+          <label><input type="checkbox" name="Department" value="Mathematics"> Mathematics</label>
+          <label><input type="checkbox" name="Department" value="Chemistry"> Chemistry</label>
+          <label><input type="checkbox" name="Department" value="Geography"> Geography</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Course <span class="req">*</span></div>
+      <div class="colon">:</div>
+      <div class="field-input">
+        <select name="Course" required>
+          <option value="">-- Select --</option>
+          <option>B.A.</option>
+          <option>B.Sc.</option>
+          <option>B.Com.</option>
+          <option>Basic Computer Course</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Semester</div>
+      <div class="colon">:</div>
+      <div class="field-input">
+        <select name="Semester">
+          <option value="">-- Select --</option>
+          <option>Semester 1</option><option>Semester 2</option>
+          <option>Semester 3</option><option>Semester 4</option>
+          <option>Semester 5</option><option>Semester 6</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Roll No.</div>
+      <div class="colon">:</div>
+      <div class="field-input"><input type="text" name="Roll No" placeholder="Your roll number"></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Registration No.</div>
+      <div class="colon">:</div>
+      <div class="field-input"><input type="text" name="Registration No" placeholder="University registration no."></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Category <span class="req">*</span></div>
+      <div class="colon">:</div>
+      <div class="field-input">
+        <div class="radio-group">
+          <label><input type="radio" name="Category" value="SC" required> SC</label>
+          <label><input type="radio" name="Category" value="ST"> ST</label>
+          <label><input type="radio" name="Category" value="OBC"> OBC</label>
+          <label><input type="radio" name="Category" value="EWS"> EWS</label>
+          <label><input type="radio" name="Category" value="General"> General</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Contact Details</div>
+
+    <div class="field-row">
+      <div class="field-label">City / Town <span class="req">*</span></div>
+      <div class="colon">:</div>
+      <div class="field-input"><input type="text" name="City" required placeholder="Your city or town"></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Address <span class="req">*</span></div>
+      <div class="colon">:</div>
+      <div class="field-input"><textarea name="Address" required placeholder="Full address"></textarea></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Student Photo</div>
+      <div class="colon">:</div>
+      <div class="field-input file-wrapper">
+        <input type="file" name="Student Photo" accept="image/*">
+      </div>
+    </div>
+
+    <div class="declaration">
+      <input type="checkbox" id="declare" required>
+      <p>I hereby declare that all information furnished above is true, complete and correct to the best of my knowledge. I understand that any misrepresentation shall render me liable for cancellation of admission.</p>
+    </div>
+
+    <div class="btn-row">
+      <button type="submit" class="btn-submit">Submit</button>
+      <button type="reset" class="btn-reset">Reset</button>
+    </div>
+
+  </form>
+</div>
+
+
+
+</body>
+</html>
